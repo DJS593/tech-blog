@@ -43,3 +43,7 @@ WHEN I click on the logout option in the navigation
 THEN I am signed out of the site
 WHEN I am idle on the page for more than a set time
 THEN I am automatically signed out of the site 
+
+
+
+1. Will need to pull user_id from session instead of body once I add AUTH
