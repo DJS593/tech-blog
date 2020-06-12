@@ -10,8 +10,8 @@ router.get('/', (req, res) => {
     // Query configuration
     attributes: [
       'id', 
-      'post_text', 
       'title', 
+      'content', 
       'created_at'
        
     ],
@@ -48,8 +48,8 @@ router.get('/:id', (req, res) => {
     },
     attributes: [
       'id', 
-      'content', 
       'title', 
+      'content', 
       'created_at'
       
     ],

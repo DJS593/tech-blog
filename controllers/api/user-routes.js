@@ -30,7 +30,7 @@ router.get('/:id', (req, res) => {
         attributes: [
           'id',
           'title',
-          'post_text',
+          'content',
           'created_at'
         ]
       },
@@ -142,7 +142,7 @@ router.put('/:id', /*withAuth,*/ (req, res) => {
 
 
 // DELETE /api/users/1
-router.delete('/:id', withAuth, (req, res) => {
+router.delete('/:id', /*withAuth,*/ (req, res) => {
   User.destroy({
     where: {
       id: req.params.id
@@ -163,7 +163,7 @@ router.delete('/:id', withAuth, (req, res) => {
 
 
 // allow user to logout
-router.post('/logout', withAuth, (req, res) => {
+router.post('/logout', /*withAuth,*/ (req, res) => {
   if (req.session.loggedIn) {
     req.session.destroy(() => {
       res.status(204).end();
