@@ -7,7 +7,7 @@ const path = require('path');
 
 //
 const sequelize = require('./config/connection')
-
+const db = require('./models')
 //
 const exphbs  = require('express-handlebars');
 //const hbs = exphbs.create({ helpers });
@@ -16,7 +16,7 @@ const exphbs  = require('express-handlebars');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const sess = {
-  secret: 'Super secret secret',
+  secret: 'secretDJS',
   cookie: {},
   resave: false,
   saveUninitialized: true,
@@ -57,6 +57,6 @@ app.use(routes);
 
 
 // connection to db and server; should be on bottom of server.js
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ force: true }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
 });
