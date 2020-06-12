@@ -57,6 +57,7 @@ app.use(routes);
 
 
 // connection to db and server; should be on bottom of server.js
-sequelize.sync({ force: true }).then(() => {
+// force should be set to false unless I want to drop database
+sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
 });
