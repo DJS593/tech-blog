@@ -1,8 +1,21 @@
+
+
+{{!-- Had to delete the final class template....you can get it from the class material --}}
+
+
 <ol class="post-list">
-  {{#each posts as |post|}}
   <li>
-    {{> post-info post }}
-    {{!-- above needed to import partial   --}}
+    <article class="post">
+      <div class="title">
+        <a href="{{title}}" target="_blank">{{title}}</a>
+        <span>({{title}})</span>
+      </div>
+      <div class="meta">
+        Post by {{user.username}} on
+        {{created_at}}
+        |
+        <a href="/post/{{id}}">{{comments.length}} comment(s)</a>
+      </div>
+    </article>
   </li>
-  {{/each}}
 </ol>

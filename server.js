@@ -10,7 +10,7 @@ const sequelize = require('./config/connection')
 const db = require('./models')
 //
 const exphbs  = require('express-handlebars');
-//const hbs = exphbs.create({ helpers });
+const hbs = exphbs.create({});
 
 // 
 const session = require('express-session');
@@ -40,12 +40,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 // for express-handlebars
-app.engine('handlebars', exphbs());
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
  
-app.get('/', function (req, res) {
-    res.render('home');
-});
+// app.get('/', function (req, res) {
+//     res.render('home');
+// });
  
 // get the client
 const mysql = require('mysql2');

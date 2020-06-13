@@ -56,5 +56,5 @@ async function loginFormHandler(event) {
 
 /* turning the functions off for now unitl I can match the html template with this */
 
-//document.querySelector('.signup-form').addEventListener('submit', signupFormHandler);
-//document.querySelector('.login-form').addEventListener('submit', loginFormHandler);
+document.querySelector('.signup-form').addEventListener('submit', signupFormHandler);
+document.querySelector('.login-form').addEventListener('submit', loginFormHandler);
