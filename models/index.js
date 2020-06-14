@@ -13,41 +13,27 @@ Post.belongsTo(User, {
   foreignKey: 'user_id',
 })
 
-// need to use belongsToMany method for many-to-many associations
-// User.belongsToMany(Post, {
-//   through: Vote,
-//   as: 'voted_posts',
-//   foreignKey: 'user_id'
-// });
-
-
-// Post.belongsToMany(User, {
-//   through: Vote,
-//   as: 'voted_posts',
-//   foreignKey: 'post_id'
-// });
-
-
 
 // model associations for Comment
 Comment.belongsTo(User, {
-  foreignKey: 'user_id'
+  foreignKey: 'user_id',
+  onDelete: 'cascade'
 });
 
 Comment.belongsTo(Post, {
-  foreignKey: 'post_id'
+  foreignKey: 'post_id',
+  onDelete: 'cascade'
 });
 
 User.hasMany(Comment, {
-  foreignKey: 'user_id'
+  foreignKey: 'user_id',
+  onDelete: 'cascade'
 });
 
 Post.hasMany(Comment, {
-  foreignKey: 'post_id'
+  foreignKey: 'post_id',
+  onDelete: 'cascade'
 });
-
-
-
 
 
 module.exports = { User, Post, Comment };

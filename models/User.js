@@ -7,7 +7,7 @@ class User extends Model {
   // set up method to run on instance data (per user to check password)
   checkPassword(loginPw) {
     return bcrypt.compareSync(loginPw, this.password);
-    // better to use the async version
+    // there is an async version that may be better with larger apps
   }
 }
 
@@ -24,17 +24,9 @@ User.init(
     // define a username column
     username: {
       type: DataTypes.STRING,
-      allowNull: false
-    },
-    // define an email column
-    email: {
-      type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
-      validate: {
-        isEmail: true
-      }
-    },
+      unique: true
+    }, 
     // define a password column
     password: {
       type: DataTypes.STRING,
