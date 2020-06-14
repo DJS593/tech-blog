@@ -1,11 +1,13 @@
+// sign-up function
 async function signupFormHandler(event) {
   event.preventDefault();
 
+  // locate and pull the username and password
   const username = document.querySelector('#username-signup').value.trim();
-  const email = document.querySelector('#email-signup').value.trim();
   const password = document.querySelector('#password-signup').value.trim();
 
-  if (username && email && password) {
+  // ensure we have both a username AND password
+  if (username && password) {
     const response = await fetch('/api/users', {
       method: 'post',
       body: JSON.stringify({
@@ -19,26 +21,29 @@ async function signupFormHandler(event) {
     // check the response status
     if (response.ok) {
       console.log('success');
+      // upon signup, route the user to the dashboard
+      document.location.replace('/dashboard');
     } else {
       alert(response.statusText);
     }
   }
 }
 
-
+// log-in function
 async function loginFormHandler(event) {
   event.preventDefault();
 
-  const email = document.querySelector('#email-login').value.trim();
+  // locate and pull the usernae and password
+  const username = document.querySelector('#username-login').value.trim();
   const password = document.querySelector('#password-login').value.trim();
 
   
-  // don't think we will use email, so this will probably change
-  if (email && password) {
+  // ensure we have both a userame AND password
+  if (username && password) {
     const response = await fetch('/api/users/login', {
       method: 'post',
       body: JSON.stringify({
-        email,
+        username,
         password
       }),
       headers: { 'Content-Type': 'application/json' }
@@ -52,9 +57,8 @@ async function loginFormHandler(event) {
     }
   }
 }
-/********************************************** */
 
-/* turning the functions off for now unitl I can match the html template with this */
 
+// event listeners to trigger the above functions
 document.querySelector('.signup-form').addEventListener('submit', signupFormHandler);
 document.querySelector('.login-form').addEventListener('submit', loginFormHandler);

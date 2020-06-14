@@ -1,9 +1,11 @@
+// dependencies
 const router = require('express').Router();
 const { Post, User, Comment } = require('../../models');
 const sequelize = require('../../config/connection');
-//const withAuth = require('../utils/auth');
+const withAuth = require('../utils/auth');
 
-// get all users
+
+// get all posts
 router.get('/', (req, res) => {
   console.log('=======================');
   Post.findAll({
@@ -38,9 +40,8 @@ router.get('/', (req, res) => {
     });
 });
 
-const promp = new Promise((res,rej)=>rej(0))
 
-// GET a single Post
+// get a single post by ID
 router.get('/:id', (req, res) => {
   Post.findOne({
     where: {
@@ -82,14 +83,12 @@ router.get('/:id', (req, res) => {
 });
 
 
-// POST /api/posts
-router.post('/', /*withAuth,*/ (req, res) => {
+// create a post including loggedIn authentication
+router.post('/', withAuth, (req, res) => {
   Post.create({ 
     title: req.body.title,
     content: req.body.content,
-    user_id: req.body.user_id
-    // change this to session once I put in Auth
-    //user_id: req.session.user_id
+    user_id: req.session.user_id
   })
   .then(dbPostData => res.json(dbPostData))
   .catch(err => {
@@ -99,10 +98,12 @@ router.post('/', /*withAuth,*/ (req, res) => {
 });
 
 
-router.put('/:id', /*withAuth,*/ (req, res) => {
+// update a post by ID icluding loggedIn authentication
+router.put('/:id', withAuth, (req, res) => {
   Post.update(
     {
-      title: req.body.title
+      title: req.body.title,
+      content: req.body.content
     },
     {
       where: {
@@ -124,8 +125,8 @@ router.put('/:id', /*withAuth,*/ (req, res) => {
 });
 
 
-// delete a post
-router.delete('/:id', /*withAuth,*/ (req, res) => {
+// delete a post by ID including authentication
+router.delete('/:id', withAuth, (req, res) => {
   Post.destroy({
     where: {
       id: req.params.id
@@ -143,7 +144,6 @@ router.delete('/:id', /*withAuth,*/ (req, res) => {
       res.status(500).json(err);
     });
 });
-
 
 
 

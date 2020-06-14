@@ -1,11 +1,11 @@
+// dependencies
 const router = require('express').Router()
 const { User, Post, Comment } = require('../../models');
-//const withAuth = require('../utils/auth');
-// withAuth has not been established yet
+const withAuth = require('../utils/auth');
 
-// GET /api/users
+
+// get all users
 router.get('/', (req, res) => {
-  // Access our User model and run .findAll() method
   User.findAll({
     attributes: { exclude: ['password'] }
   })
@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 });
 
 
-// GET /api/users/1
+// get individual user by ID
 router.get('/:id', (req, res) => {
   User.findOne({
     attributes: { exclude: ['password'] },
@@ -45,8 +45,6 @@ router.get('/:id', (req, res) => {
       {
         model: Post,
         attributes: ['title'],
-        //through: Vote,
-        //as: 'voted_posts'
       }
     ]
   })
@@ -64,16 +62,14 @@ router.get('/:id', (req, res) => {
 });
 
 
-// POST /api/users
-router.post('/', /*withAuth,*/ (req, res) => {
-  // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
+// create a new user
+router.post('/', (req, res) => {
   User.create({ 
     username: req.body.username,
-    email: req.body.email,
     password: req.body.password
   })
   .then(dbUserData => {
-    console.log(dbUserData);
+    // save user data during session
     req.session.save(() => {
       req.session.user_id = dbUserData.id;
       req.session.username = dbUserData.username;
@@ -82,18 +78,22 @@ router.post('/', /*withAuth,*/ (req, res) => {
       res.json(dbUserData);
     });
   })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+  });
 });    
 
 
 // to verify a password we can use a GET, but POST is preferred since the data is passed in the req.body versus URL string
-router.post('/login', /*withAuth,*/ (req, res) => {
+router.post('/login', (req, res) => {
   User.findOne({
     where: {
-      email: req.body.email
+      email: req.body.username
     }
   }).then(dbUserData => {
     if (!dbUserData) {
-      res.status(400).json({ message: 'No user with that email address!' });
+      res.status(400).json({ message: 'No user with that username!' });
       return;
     }
 
@@ -111,37 +111,40 @@ router.post('/login', /*withAuth,*/ (req, res) => {
 
       res.json({ user: dbUserData, message: 'You are now logged in!' });
     });
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err);
   });
 });
 
 
 
-// PUT /api/users/1
-router.put('/:id', /*withAuth,*/ (req, res) => {
-  // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
+/* update a user; not needed for this assignment, but leaving for now in case I wish to enhance the site */
+// router.put('/:id', /*withAuth,*/ (req, res) => {
 
-  // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
-  User.update(req.body, {
-    individualHooks: true,
-    where: {
-      id: req.params.id
-    }
-  })
-    .then(dbUserData => {
-      if (!dbUserData[0]) {
-        res.status(404).json({ message: 'No user found with this id' });
-        return;
-      }
-      res.json(dbUserData);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-});
+//   // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
+//   User.update(req.body, {
+//     individualHooks: true,
+//     where: {
+//       id: req.params.id
+//     }
+//   })
+//     .then(dbUserData => {
+//       if (!dbUserData[0]) {
+//         res.status(404).json({ message: 'No user found with this id' });
+//         return;
+//       }
+//       res.json(dbUserData);
+//     })
+//     .catch(err => {
+//       console.log(err);
+//       res.status(500).json(err);
+//     });
+// });
 
 
-// DELETE /api/users/1
+// delete a user by ID
 router.delete('/:id', /*withAuth,*/ (req, res) => {
   User.destroy({
     where: {
@@ -162,7 +165,7 @@ router.delete('/:id', /*withAuth,*/ (req, res) => {
 });
 
 
-// allow user to logout
+// allow user to log out
 router.post('/logout', /*withAuth,*/ (req, res) => {
   if (req.session.loggedIn) {
     req.session.destroy(() => {
