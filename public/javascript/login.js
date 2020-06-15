@@ -12,7 +12,6 @@ async function signupFormHandler(event) {
       method: 'post',
       body: JSON.stringify({
         username,
-        email,
         password
       }),
       headers: { 'Content-Type': 'application/json' }
@@ -33,10 +32,12 @@ async function signupFormHandler(event) {
 async function loginFormHandler(event) {
   event.preventDefault();
 
-  // locate and pull the usernae and password
+  // locate and pull the username and password
   const username = document.querySelector('#username-login').value.trim();
   const password = document.querySelector('#password-login').value.trim();
 
+  console.log(username);
+  console.log(password);
   
   // ensure we have both a userame AND password
   if (username && password) {
