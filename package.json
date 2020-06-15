@@ -4,8 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
+    "test": "jest",
+    "start": "node app.js",
     "seed": "node seeds/index.js"
   },
   "repository": {
@@ -26,6 +26,7 @@
     "express": "^4.17.1",
     "express-handlebars": "^4.0.4",
     "express-session": "^1.17.1",
+    "jest": "^26.0.1",
     "mysql2": "^2.1.0",
     "sequelize": "^5.21.12"
   }

@@ -1,29 +1,31 @@
-<form class="login-form">
-  <div>
-    <label for="username-login">username:</label>
-    <input type="text" id="username-login" />
+<form class ="login mx-5 my-5">
+  <div class="form-group ">
+    <label for="InputEmail1">Email address</label>
+    <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
   </div>
-  <div>
-    <label for="password-login">password:</label>
-    <input type="password" id="password-login" />
+  <div class="form-group">
+    <label for="InputPassword1">Password</label>
+    <input type="password" class="form-control" id="InputPassword1">
   </div>
-  <div>
-    <button type="submit">login</button>
-  </div>
+  <button type="submit" class="btn btn-primary">login</button>
 </form>
 
-<form class="signup-form">
-  <div>
-    <label for="username-signup">username:</label>
-    <input type="text" id="username-signup" />
+<form class ="signup mx-5 my-5">
+<div class="form-group ">
+    <label for="InputUsername">Username</label>
+    <input type="username" class="form-control" id="InputUsername">
   </div>
-  <div>
-    <label for="password-signup">password:</label>
-    <input type="password" id="password-signup" />
+  <div class="form-group">
+    <label for="InputEmail">Email address</label>
+    <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
   </div>
-  <div>
-    <button type="submit">signup</button>
+  <div class="form-group">
+    <label for="InputPassword">Password</label>
+    <input type="password" class="form-control" id="InputPassword">
   </div>
+  <button type="submit" class="btn btn-primary">Signup</button>
 </form>
 
 <script src="/javascript/login.js"></script>

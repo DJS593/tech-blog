@@ -1,23 +1,22 @@
-// organize the dependencies
-
-//
+// dependencies
 const express = require('express');
-;
 const path = require('path');
+const sequelize = require('./config/connection');
+//const db = require('./models')
 
-//
-const sequelize = require('./config/connection')
-const db = require('./models')
-//
+// helper functioin
+const helpers = require('./utils/helpers');
+
+// handlebars
 const exphbs  = require('express-handlebars');
-const hbs = exphbs.create({});
+const hbs = exphbs.create({helpers});
 
 // 
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const sess = {
   secret: 'secretDJS',
-  cookie: {},
+  cookie: {maxAge: 3600},
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
@@ -27,6 +26,7 @@ const sess = {
 
 
 const app = express();
+
 const PORT = process.env.PORT || 3001
 
 // routes are in the controllers folder
@@ -38,26 +38,18 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-
-// for express-handlebars
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+// set Handlebars as the default template engine
+app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
+  
  
-// app.get('/', function (req, res) {
-//     res.render('home');
-// });
- 
-// get the client
-const mysql = require('mysql2');
- 
-
-// routes and sessions
+// access routes and sessions
 app.use(session(sess));
 app.use(routes);
 
 
 // connection to db and server; should be on bottom of server.js
 // force should be set to false unless I want to drop database
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ force: true }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
 });
