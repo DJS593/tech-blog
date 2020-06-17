@@ -42,6 +42,6 @@ app.use(routes);
 // app.listen(PORT, () => {
 //   console.log(`App listening on port ${PORT}!`);
 // });
-sequelize.sync({ force: true }).then(() => { //once you have the association in index.js file , change the force = true and start the server to drop and create the tables. Once thats done, change it back to false
+sequelize.sync({ force: false }).then(() => { //once you have the association in index.js file , change the force = true and start the server to drop and create the tables. Once thats done, change it back to false
   app.listen(PORT, () => console.log('Now listening'));
 });
