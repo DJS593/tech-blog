@@ -1,3 +1,6 @@
+/*
+
+
 // dependencies
 const express = require('express');
 const path = require('path');
@@ -53,3 +56,5 @@ app.use(routes);
 sequelize.sync({ force: true }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
 });
+
+*/
