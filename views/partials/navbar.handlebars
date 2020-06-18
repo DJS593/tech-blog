@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand" href="/">Tech Blog</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -11,9 +11,12 @@
       <li class="nav-item text-white"> 
         {{#if loggedIn}}
         <a class="nav-link" href="/dashboard">Dashboard</a>
-        <li class="nav-item text-white ml-auto">
-        <button id ="logout" class ="btn-dark float-right">logout</button>  
+       <!-- <li class="nav-item text-white ml-auto">
+        <button id ="logout" class ="btn-dark float-right">logout</button>  -->
         </li> 
+        <li>
+          <a class="nav-link" id="logout" href="/login">Logout</a> 
+        </li>
         {{else}} 
         <a class="nav-link" href="/login">Login</a>
         {{/if}}
@@ -22,3 +25,5 @@
     </ul>
   </div>
 </nav>
+
+

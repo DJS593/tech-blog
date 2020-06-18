@@ -1,17 +1,14 @@
 async function signupFormHandler (event) {
   event.preventDefault();
 
-  const username = document.querySelector('#InputUsername').value.trim();
-  const email = document.querySelector('#InputEmail').value.trim();
-  const password = document.querySelector('#InputPassword').value.trim();
+  const username = document.querySelector('#signupUsername').value.trim();
+  const password = document.querySelector('#signupPassword').value.trim();
 
-  if(username && email && password ) {
+  if(username && password ) {
       const response = await fetch ('/api/users', {
           method: 'post',
-
           body: JSON.stringify({
               username,
-              email,
               password
           }),
 
@@ -19,7 +16,7 @@ async function signupFormHandler (event) {
       })
       //adding error handler
       if(response.ok) {
-          console.log('Success');
+          console.log('Successful signup');
       } else {
           alert (response.statusText);
       }
@@ -30,15 +27,14 @@ async function signupFormHandler (event) {
 async function loginFormHandler (event) {
   event.preventDefault();
 
-  const email = document.querySelector('#InputEmail1').value.trim();
-  const password = document.querySelector('#InputPassword1').value.trim();
+  const username = document.querySelector('#savedUsername').value.trim();
+  const password = document.querySelector('#savedPassword').value.trim();
 
-  if( email && password ) {
+  if( username && password ) {
       const response = await fetch ('/api/users/login', {
           method: 'post',
-
           body: JSON.stringify({
-              email,
+              username,
               password
           }),
 

@@ -109,20 +109,24 @@
 
 
 
-// ****************** test ***************//
 
+// dependencies
 const router = require('express').Router();
 const { Post, Comment } = require('../../models');
+const withAuth = require('../../utils/auth')
 
-//GET /api/comments ============================================================================
+
+// get all comments
 router.get('/', (req,res) => {
     Comment.findAll({
         include:
             {
                 model: Post,
-                attributes: ['title', 'post_text']
+                attributes: [
+                    'title', 
+                    'post_text'
+                ]
             }   
-
     })
     .then(dbCommentData => {
         res.json(dbCommentData)
@@ -133,8 +137,30 @@ router.get('/', (req,res) => {
     });
 });
 
-//POST ======================================================================================
-router.post('/', (req,res) => {
+
+//get comment by ID
+router.get('/:id', (req, res) => {
+  Comment.findOne({
+    where: {
+      id: req.params.id
+    }
+  })
+  .then(dbCommentData => {
+    if (!dbCommentData) {
+      res.status(404).json({ message: 'No comment found with this id' });
+      return;
+    }
+    res.json(dbCommentData);
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+  });
+});
+
+
+// create a comment by an authenticated user
+router.post('/', withAuth, (req,res) => {
     //check session
     if(req.session){
         Comment.create({
@@ -147,12 +173,11 @@ router.post('/', (req,res) => {
             console.log(err);
             res.status(400).json(err);
         })
-    }
-    
+    }  
 });
 
 
-//DELETE ====================================================================================
+// delete comment by ID
 router.delete('/:id', (req,res) => {
     Comment.destroy ({
         where: {
@@ -161,17 +186,15 @@ router.delete('/:id', (req,res) => {
     })
     .then(dbCommentData => {
         if(!dbCommentData){
-            res.status(404).json({ message: 'No such comment found' });
+            res.status(404).json({ message: 'No comment found with this id' });
             return;
         }
         res.json(dbCommentData);
     })
     .catch(err => {
         console.log(err);
-        res.status(400).json(err);
+        res.status(500).json(err);
     });
-
-
 });
 
 

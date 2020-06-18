@@ -1,9 +1,9 @@
-<article class = "mx-5 my-5">
+<article class = "mx-4 my-4">
     <a href ="/dashboard"> &larr; Back to dashboard</a>
 
-    <h2>
+    <h3>
         Edit Blog
-    </h2>
+    </h3>
 
 <form class ="edit-post-form"> 
     <div class="form-group edit-post-form">
@@ -13,8 +13,8 @@
       <div class="card-body edit-post-form">
           <p class="card-text text-white">{{post_text}}</p>
           <a href="/post/{{id}}" class="btn btn-primary">{{comments.length}} {{format_plural "comment" comments.length}}</a>
-          <button type = "submit" class = "btn btn-primary" id ="save">Save</button>
-          <button type ="button" class ="btn btn-primary delete-post-btn">Delete</button>
+          <button type = "submit" class = "btn btn-warning" id ="save">Save</button>
+          <button type ="button" class ="btn btn-warning delete-post-btn">Delete</button>
       </div>
     </div>
 </form>

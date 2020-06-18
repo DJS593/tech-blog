@@ -39,10 +39,9 @@ router.get('/:id', (req,res)=>{
 
 //POST /api/users/ ==========================================================================
 router.post('/', (req,res)=>{
-    //expects {username, email and password}
+    //requires username and password
     User.create({
         username: req.body.username,
-        email: req.body.email,
         password: req.body.password
     })
     .then(dbUserData => {
@@ -63,9 +62,9 @@ router.post('/', (req,res)=>{
 
 //Login route============================================================================
 router.post('/login', (req,res) => {
-    User.findOne({ //expects email and password
+    User.findOne({ 
         where: {
-            email: req.body.email
+            username: req.body.username
         }
     })
     .then(dbUserData => {
@@ -111,9 +110,9 @@ router.post('/logout', (req,res) => {
       }
 });
 
-//PUT /api/users/1 ==========================================================================
+
+// upodate a user by ID
 router.put('/:id', (req,res) => {
-    //expects {username, email and password}
 
     //if req.body has exact key value pair to match the model, you can just req.body instead 
     User.update(req.body, {

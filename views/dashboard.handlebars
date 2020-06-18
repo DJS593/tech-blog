@@ -1,5 +1,5 @@
-<section class = "mx-5 my-5">
-<h2> Create New Blog</h2>
+<section class = "mx-4 my-4">
+<h3> Create New Blog</h3>
 
         <form class ="new-post-form">
         <div class="form-group ">
@@ -11,20 +11,20 @@
             <label for="post-text">Text</label>
             <textarea class = "form-control" id =" post-text" rows = "3" name ="blog-body"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="submit" class="btn btn-danger">Create</button>
         </form>
 </section>
 
 {{#if posts.length}}
-<section class = "mx-5 my-5">
-    <h2> Your Blogs </h2>
+<section class = "mx-4 my-4">
+    <h3> Your Blogs </h3>
     {{#each posts as |post|}}
-    <div class="card text-white bg-dark mb-3 mx-5 my-5 rounded">
-    <h5 class="card-header text-white"> {{post.title}} <span class="float-right">{{format_date post.created_at}}</span></h5>
+    <div class="card text-black bg-default mb-3 mx-5 my-5 rounded">
+    <h5 class="card-header text-black"> {{post.title}} <span class="float-right">{{format_date post.created_at}}</span></h5>
     <div class="card-body">
-        <p class="card-text text-white">{{post.post_text}}</p>
-        <a href="/post/{{post.id}}" class="btn btn-primary">{{comments.length}} {{format_plural "comment" post.comments.length}}</a>
-        <a href ="/dashboard/edit/{{post.id}}" class ="btn btn-primary edit-link">Edit Blog</a>
+        <p class="card-text text-black">{{post.post_text}}</p>
+        <a href="/post/{{post.id}}" class="btn btn-danger">{{comments.length}} {{format_plural "comment" post.comments.length}}</a>
+        <a href ="/dashboard/edit/{{post.id}}" class ="btn btn-danger edit-link">Edit Blog</a>
     </div>
     </div>
     {{/each}}
