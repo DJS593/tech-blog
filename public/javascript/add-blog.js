@@ -2,11 +2,10 @@ async function dashboardFormHandler(event) {
   event.preventDefault();
 
   const title = document.querySelector('input[name="post-title"]').value;
-  const post_text = document.querySelector('textarea[name = "blog-body"]').value;
+  const post_text = document.querySelector('textarea[name = "content"]').value;
 
   const response = await fetch(`/api/posts`, {
        method: 'POST',
-
        body: JSON.stringify({
           title,
           post_text

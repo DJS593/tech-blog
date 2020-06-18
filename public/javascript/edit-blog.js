@@ -2,9 +2,7 @@ async function editFormHandler(event) {
   event.preventDefault();
 
   const title = document.querySelector('input[name = "post-title"]').value.trim();
-console.log("here");
-  const id = window.location.toString().split('/') [
-      window.location.toString().split('/').length - 1
+  const id = window.location.toString().split('/') [window.location.toString().split('/').length - 1
   ];
 
   //console.log(comment_text, post_id);
