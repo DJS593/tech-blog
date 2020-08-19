@@ -1,8 +1,0 @@
-<div class="card text-black bg-default mb-3 mx-4 my-4 rounded">
-  <h5 class="card-header text-black"> {{user.username}} <span class="float-right">{{format_date created_at}}</span></h5>
-  <div class="card-body">
-    <h5 class = "card-title text-black">{{title}}</h5>
-    <p class="card-text text-black">{{post_text}}</p>
-    <a href="/post/{{id}}" class="btn btn-danger">{{comments.length}} {{format_plural "comment" comments.length}}</a>
-  </div>
-</div>

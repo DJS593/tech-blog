@@ -1,23 +1,21 @@
-{{> card-info post }}
-
-{{#if loggedIn}}
-<form class =" comment-form mx-4 my-4">
-  <div class="form-group">
-    <textarea name ="comment-body"></textarea>
+<div class="row">
+  <div class="col-11 mx-auto my-2 mb-0">
+    {{> post-info post }}
   </div>
-  <button type="submit" class="btn btn-danger">add comment</button>
-</form>
-{{/if}}
-
-
-{{#each post.comments}}
-<div class="card text-black bg-default w-75 mx-4 my-4">
-  <div class="card-body">
-    <h5 class="card-title text-black">{{user.username}} on {{format_date created_at}}</h5>
-    <p class="card-text text-black">{{comment_text}}</p>
+  <div class="col-11 mx-auto mb-0 my-0">
+    {{#if loggedIn}}
+      <form class="new-post-form comment-form input-group px-0">
+        <textarea class="form-control" name="comment-body" rows="3"></textarea>
+        <button type="submit" class="btn btn-outline-success">Add comment</button>
+      </form>
+    {{/if}}
+  </div>
+  <div class="col-11 mx-auto my-2">
+    <div class="list-group">
+      {{> comments post.comments }}
+    </div>
   </div>
 </div>
-{{/each}}
 
 {{#if loggedIn}}
 <script src="/javascript/comment.js"></script>

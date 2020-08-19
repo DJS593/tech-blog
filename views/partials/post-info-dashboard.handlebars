@@ -5,6 +5,8 @@
   </div>
   <div class="card-body">
     <p class="card-text">{{post_content}}</p>
-    <a href="/post/{{id}}">{{comments.length}} {{format_plural "comment" comments.length}}</a>
+    <a class="card-subtext" href="/post/{{id}}">{{comments.length}} {{format_plural "comment" comments.length}}</a>
+     | 
+    <a href="/dashboard/edit/{{id}}" class="edit-link card-subtext">Edit post</a>
   </div>
 </div>

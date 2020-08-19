@@ -1,24 +1,4 @@
-// // npm dependencies
-// require('dotenv').config();
-// const Sequelize = require('sequelize');
-
-
-// const sequelize = process.env.JAWSDB_URL
-//   ? new Sequelize(process.env.JAWSDB_URL)
-//   : new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PW, {
-//       host: 'localhost',
-//       dialect: 'mysql',
-//       dialectOptions: {
-//         decimalNumbers: true,
-//       },
-//     });
-
-// module.exports = sequelize;
-
-
-
-
-
+// import the Sequelize constructor from the library
 const Sequelize = require('sequelize');
 
 require('dotenv').config();
@@ -26,9 +6,11 @@ require('dotenv').config();
 
 let sequelize;
 
+// when deployed to Heroku
 if (process.env.JAWSDB_URL) {
   sequelize = new Sequelize(process.env.JAWSDB_URL);
 } else {
+  // localhost
   sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PW, {
     host: 'localhost',
     dialect: 'mysql',
