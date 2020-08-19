@@ -111,8 +111,12 @@ router.get('/login', (req,res) => {
 })
 
 // rendering sign up page
-router.get('/signup', (req, res) => {
-    res.render('signup');
+router.get('/create-account', (req, res) => {
+    if (req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    }
+    res.render('create-account');
 })
 
 module.exports = router;

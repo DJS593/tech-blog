@@ -92,6 +92,16 @@ router.get('/edit/:id', withAuth, (req,res) => {
         res.status(500).json(err);
     });
 
+    router.get('/create-post', (req, res) => {
+        if (!req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    }
+    res.render('create-post', { loggedIn: req.session.loggedIn} );
+    });
+
+    
+
 })
 
 module.exports = router;
