@@ -3,16 +3,16 @@ const express = require('express');
 const routes = require('./controllers');
 const path = require('path');
 const sequelize = require('./config/connection');
-//const db = require('./models')
 
-// helper functioin
+
+// helper function
 const helpers = require('./utils/helpers');
 
 // handlebars
 const exphbs  = require('express-handlebars');
 const hbs = exphbs.create({helpers});
 
-// session (connects session to sequelize db) --> authentication
+// session (connects session to sequelize db)
 const session = require('express-session');
 
 const app = express();
@@ -48,7 +48,7 @@ app.use(routes);
 
 // connection to db and server; should be on bottom of server.js
 // force should be set to false unless I want to drop database
-sequelize.sync({ force: true }).then(() => {
+sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
 });
 

@@ -1,14 +1,24 @@
 {{#if posts.length}}
-  <h2 class="dashboard-text text-center">Your Posts</h2>
-  <div class="row">
+<section>
+  <h2>Your Posts</h2>
+  <ol>
     {{#each posts as |post|}}
-      <div class="col-11 mx-auto my-2">
-        {{> post-info-dashboard post}}
-      </div>
+    <ul>
+      <article class="post">
+    <div class="title">
+       <a href="/post/{{id}}">{{title}}</a>
+    </div>
+    <div class="meta">
+        <strong>Posted by {{user.username}} on {{format_date created_at}}</strong>
+    </div>
+    </article>
+      <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit post</a>
+    </ul>
     {{/each}}
-  </div> 
+  </ol>
+</section>
 {{/if}}
 
-{{#unless posts.length}}
-  <h3 class="dashboard-text text-center">You have no posts! Why not create one?</h3>
-{{/unless}}
+<div>
+    <button type="submit"><a href="/dashboard/newpost" class="create-btn">Create New Post</a></button>
+</div>

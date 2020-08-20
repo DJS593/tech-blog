@@ -1,21 +1,21 @@
-<div class="row">
-  <div class="col-11 mx-auto my-2 mb-0">
-    {{> post-info post }}
+<!-- displaying articles -->
+{{> post-info post}}
+
+<!-- displaying form and comments-->
+<!-- only display if logged in -->
+{{#if loggedIn}}
+<form class="comment-form">
+  <div>
+    <textarea name="comment-body"></textarea>
   </div>
-  <div class="col-11 mx-auto mb-0 my-0">
-    {{#if loggedIn}}
-      <form class="new-post-form comment-form input-group px-0">
-        <textarea class="form-control" name="comment-body" rows="3"></textarea>
-        <button type="submit" class="btn btn-outline-success">Add comment</button>
-      </form>
-    {{/if}}
+
+  <div>
+    <button type="submit">Add Comment</button>
   </div>
-  <div class="col-11 mx-auto my-2">
-    <div class="list-group">
-      {{> comments post.comments }}
-    </div>
-  </div>
-</div>
+</form>
+{{/if}}
+
+{{> comments post.comments}}
 
 {{#if loggedIn}}
 <script src="/javascript/comment.js"></script>
